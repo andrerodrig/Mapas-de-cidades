@@ -1,0 +1,24 @@
+{% load leaflet_tags %}
+
+<head>
+{% leaflet_css %}
+{% leaflet_js %}
+</head>
+
+<div>
+	<h1>{{ city.name }}</h1>
+	{% leaflet_map "main" callback="map_init" %}
+</div>
+
+<script type="text/javascript">
+	function map_init(map, options){
+		// get point lat and lon
+		let lon = "{{ city.geometry.x }}";
+		let lat = "{{ city.geometry.y }}";
+
+
+		map.setView([lat,lon], 12);
+		L.marker([lat,lon]).addTo(map);
+	}
+
+</script>
